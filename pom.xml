@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>mmojzis.zp</groupId>
-    <artifactId>gen_alg</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>slovak_tsp</artifactId>
+    <version>1.0.0</version>
     <name>gen_alg</name>
-    <description>gen_alg</description>
+    <description>TSP na Slovensku</description>
     <properties>
         <java.version>17</java.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
