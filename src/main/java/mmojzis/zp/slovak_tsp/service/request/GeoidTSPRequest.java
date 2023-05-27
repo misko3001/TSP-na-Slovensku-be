@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class GeoidTSPRequest extends TSPRequest {
 
-    private ISeq<WayPoint> waypoints;
+    private ISeq<WayPoint> points;
 
 }

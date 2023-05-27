@@ -10,11 +10,13 @@ import java.util.List;
 @Builder
 public class GeoidResult {
 
-    private List<WayPoint> shortestPath;
+    private List<String> route;
 
-    private List<Double> distances;
+    private Double length;
 
-    private Double fullLength;
+    private Long generations;
+
+    private Double duration;
 
     private String gpx;
 }

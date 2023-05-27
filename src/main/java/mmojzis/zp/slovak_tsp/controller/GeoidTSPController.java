@@ -25,7 +25,7 @@ public class GeoidTSPController {
 
     @PostMapping
     public GeoidResultDto calculateGeoidTSP(@Valid @RequestBody GeoidTSPRequestDto dto) {
-        log.info("Calculate TSP with {} waypoints", dto.getWaypoints().size());
+        log.info("Calculate TSP with {} waypoints", dto.getPoints().size());
 
         return geoidMapper.resultToDto(geoidTSPService.calculate(geoidMapper.geoidDtoToRequest(dto)));
     }
