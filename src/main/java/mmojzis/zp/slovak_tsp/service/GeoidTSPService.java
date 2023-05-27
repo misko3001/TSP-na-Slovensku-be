@@ -7,14 +7,10 @@ import io.jenetics.*;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionStatistics;
 import io.jenetics.jpx.GPX;
-import io.jenetics.jpx.Length;
 import io.jenetics.jpx.WayPoint;
-import io.jenetics.jpx.geom.Geoid;
 import io.jenetics.util.ISeq;
 import lombok.extern.slf4j.Slf4j;
 import mmojzis.zp.slovak_tsp.common.EvolutionWebSocketInterceptor;
-import mmojzis.zp.slovak_tsp.common.problem.MatrixTSP;
-import mmojzis.zp.slovak_tsp.domain.MatrixPoint;
 import mmojzis.zp.slovak_tsp.domain.TerminationConditions;
 import mmojzis.zp.slovak_tsp.service.request.TSPRequest;
 import mmojzis.zp.slovak_tsp.utils.factory.EngineFactory;
@@ -23,9 +19,6 @@ import mmojzis.zp.slovak_tsp.domain.GeoidResult;
 import mmojzis.zp.slovak_tsp.service.request.GeoidTSPRequest;
 import mmojzis.zp.slovak_tsp.utils.factory.InterceptorBeanFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Slf4j

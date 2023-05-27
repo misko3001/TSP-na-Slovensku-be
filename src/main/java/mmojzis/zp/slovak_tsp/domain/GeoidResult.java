@@ -1,6 +1,5 @@
 package mmojzis.zp.slovak_tsp.domain;
 
-import io.jenetics.jpx.WayPoint;
 import lombok.Builder;
 import lombok.Data;
 

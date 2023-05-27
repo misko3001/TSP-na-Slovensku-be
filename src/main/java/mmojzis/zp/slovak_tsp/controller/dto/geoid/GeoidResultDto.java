@@ -1,7 +1,6 @@
 package mmojzis.zp.slovak_tsp.controller.dto.geoid;
 
 import lombok.Data;
-import mmojzis.zp.slovak_tsp.controller.dto.WaypointDto;
 
 import java.util.List;
 
