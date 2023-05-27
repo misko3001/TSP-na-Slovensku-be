@@ -19,6 +19,10 @@ public class SlovakTSPRequestDto {
     @Valid
     private List<MatrixPointDto> points;
 
+    @NotNull(message = "maxPhenotypeAge cannot be null")
+    @Min(value = 1, message = "Maximum phenotype age must be greater than 0")
+    private Long maxPhenotypeAge;
+
     @NotNull(message = "termination cannot be null")
     @Valid
     private TerminationDto termination;

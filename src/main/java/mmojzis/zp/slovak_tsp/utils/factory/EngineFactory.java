@@ -32,6 +32,7 @@ public final class EngineFactory {
                 survivorSelector = offspringSelector;
             }
             return Engine.builder(task)
+                    .maximalPhenotypeAge(request.getMaxPhenotypeAge())
                     .populationSize(request.getPopulationSize())
                     .offspringFraction(request.getOffspringFraction())
                     .offspringSelector(offspringSelector)
@@ -64,6 +65,7 @@ public final class EngineFactory {
                 survivorSelector = offspringSelector;
             }
             return Engine.builder(task)
+                    .maximalPhenotypeAge(request.getMaxPhenotypeAge())
                     .interceptor(interceptor)
                     .populationSize(request.getPopulationSize())
                     .offspringFraction(request.getOffspringFraction())
@@ -94,6 +96,7 @@ public final class EngineFactory {
                 survivorSelector = offspringSelector;
             }
             return Engine.builder(task)
+                    .maximalPhenotypeAge(request.getMaxPhenotypeAge())
                     .populationSize(request.getPopulationSize())
                     .offspringFraction(request.getOffspringFraction())
                     .offspringSelector(offspringSelector)
@@ -126,6 +129,7 @@ public final class EngineFactory {
                 survivorSelector = offspringSelector;
             }
             return Engine.builder(task)
+                    .maximalPhenotypeAge(request.getMaxPhenotypeAge())
                     .interceptor(interceptor)
                     .populationSize(request.getPopulationSize())
                     .offspringFraction(request.getOffspringFraction())

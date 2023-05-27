@@ -13,6 +13,8 @@ public abstract class TSPRequest {
 
     private Integer populationSize;
 
+    private Long maxPhenotypeAge;
+
     private Double offspringFraction;
 
     private List<TSPSelector> selectors;

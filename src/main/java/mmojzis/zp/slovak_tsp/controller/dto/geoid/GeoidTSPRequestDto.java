@@ -27,6 +27,10 @@ public class GeoidTSPRequestDto {
     @Min(value = 1, message = "Minimum population size must be greater than 0")
     private Integer populationSize;
 
+    @NotNull(message = "maxPhenotypeAge cannot be null")
+    @Min(value = 1, message = "Maximum phenotype age must be greater than 0")
+    private Long maxPhenotypeAge;
+
     @NotNull(message = "offspringFraction cannot be null")
     @Min(value = 0, message = "Offspring fraction cannot be lower than 0")
     @Max(value = 1, message = "Offspring fraction cannot be higher than 1")
