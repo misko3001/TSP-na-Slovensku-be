@@ -33,7 +33,7 @@ public interface GeoidMapper {
 
     @AfterMapping
     default void checkIfWaypointsAreUnique(@MappingTarget GeoidTSPRequest request) {
-        ISeq<WayPoint> waypoints = request.getWaypoints();
+        ISeq<WayPoint> waypoints = request.getPoints();
 
         long distinct = waypoints.stream().map(WayPoint::getName).distinct().count();
         if (distinct < waypoints.stream().count()) {

@@ -7,9 +7,7 @@ import io.jenetics.*;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionStatistics;
 import io.jenetics.jpx.GPX;
-import io.jenetics.jpx.Length;
 import io.jenetics.jpx.WayPoint;
-import io.jenetics.jpx.geom.Geoid;
 import io.jenetics.util.ISeq;
 import lombok.extern.slf4j.Slf4j;
 import mmojzis.zp.slovak_tsp.common.EvolutionWebSocketInterceptor;
@@ -21,9 +19,6 @@ import mmojzis.zp.slovak_tsp.domain.GeoidResult;
 import mmojzis.zp.slovak_tsp.service.request.GeoidTSPRequest;
 import mmojzis.zp.slovak_tsp.utils.factory.InterceptorBeanFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -38,7 +33,7 @@ public class GeoidTSPService {
     public GeoidResult calculate(GeoidTSPRequest request) {
         log.debug("Calculate geoidTSP with waypoints: {}", request);
 
-        final GeoidTSP tsp = new GeoidTSP(request.getWaypoints());
+        final GeoidTSP tsp = new GeoidTSP(request.getPoints());
         final Engine<EnumGene<WayPoint>, Double> engine = getEngine(tsp, request);
 
         final EvolutionStatistics<Double, ?> stats = EvolutionStatistics.ofNumber();
@@ -47,7 +42,7 @@ public class GeoidTSPService {
         final ISeq<WayPoint> bestPath = tsp.decode(best.genotype());
         log.info("Statistics generated during execution:\n{}", stats);
         log.info("The calculated optimal path is: {}", bestPath);
-        return process(bestPath);
+        return process(best, tsp, stats);
     }
 
     private Phenotype<EnumGene<WayPoint>, Double> executeEvolution(Engine<EnumGene<WayPoint>, Double> engine,
@@ -58,27 +53,20 @@ public class GeoidTSPService {
                 .collect(toBestPhenotype());
     }
 
-    private GeoidResult process(ISeq<WayPoint> optimalPath) {
-        List<Double> distances = new ArrayList<>();
-        double km = 0L;
-        int size = optimalPath.size();
-        for (int i = 0; i < size; i++) {
-            double length = Geoid.DEFAULT
-                    .distance(optimalPath.get(i % size), optimalPath.get((i + 1) % size)).to(Length.Unit.METER) / 1000;
-            distances.add(length);
-            km += length;
-        }
-
+    private GeoidResult process(Phenotype<EnumGene<WayPoint>, Double> result,
+                                GeoidTSP task,
+                                EvolutionStatistics<Double, ?> stats) {
+        ISeq<WayPoint> optimalPath = task.decode(result.genotype());
         final GPX gpx = GPX.builder()
                 .addTrack(track -> track
                         .name("Optimal Path")
                         .addSegment(s -> s.points(optimalPath.append(optimalPath.get(0)).asList())))
                 .build();
-
         return GeoidResult.builder()
-                .shortestPath(optimalPath.stream().toList())
-                .distances(distances.stream().toList())
-                .fullLength(km)
+                .route(optimalPath.stream().map(wayPoint -> wayPoint.getName().get()).toList())
+                .length(task.fitness().apply(optimalPath))
+                .generations(stats.altered().count())
+                .duration(stats.evolveDuration().sum())
                 .gpx(GPX.Writer.DEFAULT.toString(gpx))
                 .build();
     }

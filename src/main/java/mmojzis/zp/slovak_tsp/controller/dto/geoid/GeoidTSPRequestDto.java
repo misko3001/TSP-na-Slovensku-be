@@ -17,7 +17,11 @@ public class GeoidTSPRequestDto {
     @NotEmpty(message = "List of waypoints cannot be empty")
     @Size(min = 2, message = "Request must contain at least two points")
     @Valid
-    private List<WaypointDto> waypoints;
+    private List<WaypointDto> points;
+
+    @NotNull(message = "maxPhenotypeAge cannot be null")
+    @Min(value = 1, message = "Maximum phenotype age must be greater than 0")
+    private Long maxPhenotypeAge;
 
     @NotNull(message = "termination cannot be null")
     @Valid
@@ -53,4 +57,9 @@ public class GeoidTSPRequestDto {
     private TSPCrossover crossover;
 
     private String crossoverModifier;
+
+    private String processId;
+
+    @Min(value = 1, message = "publishEachGeneration must be greater than 0")
+    private Long publishEachGeneration;
 }

@@ -39,7 +39,7 @@ public final class GeoidTSP implements Problem<ISeq<WayPoint>, EnumGene<WayPoint
 
     @Override
     public Function<ISeq<WayPoint>, Double> fitness() {
-        return point -> point.stream().collect(Geoid.DEFAULT.toTourLength()).to(Length.Unit.METER);
+        return point -> point.stream().collect(Geoid.DEFAULT.toTourLength()).to(Length.Unit.KILOMETER);
     }
 
     public static Selector<EnumGene<WayPoint>, Double> createSelector(TSPSelector selector,
